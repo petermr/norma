@@ -8,6 +8,14 @@ import java.util.regex.Pattern;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
+/** very simple sentence splitter.
+ * punctuation with following space.
+ * 
+ * Tested
+ * 
+ * @author pm286
+ *
+ */
 public class SentenceSplitter {
 
 	;

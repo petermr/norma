@@ -1,12 +1,27 @@
 package org.xmlcml.norma.tagger;
 
+import java.util.List;
+
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
+import org.eclipse.jetty.util.log.Log;
 import org.junit.Assert;
 import org.junit.Test;
 import org.xmlcml.norma.Norma;
 import org.xmlcml.norma.NormaArgProcessor;
 import org.xmlcml.norma.NormaFixtures;
 
+/** Taggers not yet written
+ * 
+ * @author pm286
+ *
+ */
 public class SectionTaggerTest {
+
+	private static final Logger LOG = Logger.getLogger(SectionTaggerTest.class);
+	static {
+		LOG.setLevel(Level.DEBUG);
+	}
 
 	/** iterates over two taggers.
 	 * 
@@ -20,7 +35,10 @@ public class SectionTaggerTest {
 		String cmd = "-i fulltext.xml --ctree "+cTree+" -o scholarly.html --transform nlm2html --tag foo bar";
 		norma = new Norma();
 		norma.run(cmd);
-		Assert.assertEquals("taggers", 2, ((NormaArgProcessor)norma.getArgProcessor()).getSectionTaggers().size());
+		List<SectionTaggerX> taggers = ((NormaArgProcessor)norma.getArgProcessor()).getSectionTaggers();
+		Assert.assertEquals("taggers", 2, taggers.size());
+		LOG.debug(taggers.get(0));
+		LOG.debug(taggers.get(1));
 	}
 }
 

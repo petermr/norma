@@ -46,7 +46,7 @@ import org.xmlcml.norma.svg.SVG2SVGConverter;
 import org.xmlcml.norma.table.CSVTransformer;
 import org.xmlcml.norma.table.SVGTable2HTMLConverter;
 import org.xmlcml.norma.tagger.SectionTaggerX;
-import org.xmlcml.norma.util.TransformerWrapper;
+import org.xmlcml.norma.xsl.TransformerWrapper;
 import org.xmlcml.svg2xml.pdf.PDFAnalyzer;
 import org.xmlcml.svg2xml.pdf.PDFAnalyzerIO;
 //import org.xmlcml.svg2xml.pdf.PDFAnalyzer;
@@ -478,17 +478,11 @@ public class NormaTransformer {
 		if (xmlString == null) {
 			LOG.trace("null content in: "+currentCTree.getDirectory());
 		} else if (Type.XML2HTML.equals(type)) {
-			debug0(xmlString);
 			createHtmlElement(xmlString);
-			debug1();
 		} else if (Type.XML2TXT.equals(type)) {
-			debug0(xmlString);
 			outputTxt = xmlString;
-			debug1();
 		} else if (Type.XML2XML.equals(type)) {
-			debug0(xmlString);
 			xmlElement = XMLUtil.parseXML(xmlString);
-			debug1();
 		}
 	}
 

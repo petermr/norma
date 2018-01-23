@@ -178,6 +178,7 @@ Caused by: java.io.IOException: Error: Header doesn't contain versioninfo
 	
 	@Test
 //	@Ignore // LARGE
+	// reinstated
 	public void testPDF2SVG() {
 		File cprojectDir = new File(NormaFixtures.TEST_MISC_DIR, "cproject");
 		File targetDir = new File("target/pdfs/cproject");

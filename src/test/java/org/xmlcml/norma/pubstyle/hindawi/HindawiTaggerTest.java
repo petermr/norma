@@ -14,7 +14,7 @@ import org.xmlcml.norma.tagger.MetadataElement;
 import org.xmlcml.norma.tagger.PubstyleTagger;
 import org.xmlcml.norma.tagger.TagElement;
 import org.xmlcml.norma.tagger.hindawi.HTMLHindawiTagger;
-import org.xmlcml.norma.util.TransformerWrapper;
+import org.xmlcml.norma.xsl.TransformerWrapper;
 import org.xmlcml.xml.XMLUtil;
 
 import nu.xom.Element;

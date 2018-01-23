@@ -28,7 +28,11 @@ public class SentenceSplitterTest {
 		sentenceSplitter.read(test);
 		sentenceSplitter.split();
 		List<String> sentences = sentenceSplitter.getSentenceList();
-		LOG.trace(sentences);
+		LOG.debug(sentences);
 		Assert.assertEquals(4, sentences.size());
+		Assert.assertEquals("Hello World!", sentences.get(0));
+		Assert.assertEquals(" And hello.", sentences.get(1));
+		Assert.assertEquals("\nThis is a new\n sentence.", sentences.get(2));
+		Assert.assertEquals(" And so is this one.", sentences.get(3));
 	}
 }

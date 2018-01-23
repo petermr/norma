@@ -25,7 +25,7 @@ import org.apache.log4j.Logger;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
-import org.xmlcml.norma.util.TransformerWrapper;
+import org.xmlcml.norma.xsl.TransformerWrapper;
 
 public class MiscTest {
 
@@ -303,7 +303,7 @@ I'd consider this answer an argument against the Java way of doing things.
 	}
 
 	@Test
-	@Ignore // files deleted - really just a reminder of how to do it
+	@Ignore("files deleted - really just a reminder of how to do it")
 	public void testRunStylesheet() throws TransformerFactoryConfigurationError, TransformerException {
 		File mzDir = new File(NormaFixtures.TEST_PUBSTYLE_DIR, "metabolomics/");
 		File mzFile = new File(mzDir, "small.pwiz.1.1.mzML.xml");

@@ -11,6 +11,8 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.apache.commons.lang3.tuple.Pair;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
 import org.xmlcml.graphics.html.HtmlElement;
 import org.xmlcml.graphics.html.HtmlFactory;
 import org.xmlcml.norma.InputFormat;
@@ -24,6 +26,12 @@ import nu.xom.Node;
 import nu.xom.Nodes;
 
 public abstract class PubstyleReader {
+
+	private static final Logger LOG = Logger.getLogger(PubstyleReader.class);
+	static {
+		LOG.setLevel(Level.DEBUG);
+	}
+	public final static String TEI_XSL_REOURCE = "/org/xmlcml/norma/tei/";
 
 	private URL url;
 	private RawInput rawInput;

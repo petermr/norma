@@ -5,6 +5,8 @@ import org.apache.log4j.Logger;
 
 /** tags sections based on regex for titles and content.
  * 
+ * NOT YET WRITTEN
+ * 
  * @author pm286
  *
  */
@@ -19,6 +21,12 @@ public class SectionTaggerX {
 
 	public SectionTaggerX(String filename) {
 		this.filename = filename;
+	}
+	
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("file: "+filename);
+		return sb.toString();
 	}
 	
 }

@@ -13,7 +13,7 @@ import org.xmlcml.norma.NormaFixtures;
 import junit.framework.Assert;
 
 /** test compacting SVG
- * 
+ * using --transform compactsvg
  * @author pm286
  *
  */
