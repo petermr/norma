@@ -12,6 +12,7 @@ import org.junit.Test;
 import org.xmlcml.cproject.util.CMineGlobber;
 import org.xmlcml.cproject.util.CMineTestFixtures;
 import org.xmlcml.euclid.Real2;
+import org.xmlcml.euclid.Real2Range;
 import org.xmlcml.graphics.svg.SVGElement;
 import org.xmlcml.graphics.svg.SVGSVG;
 import org.xmlcml.svg2xml.page.PageCropper;
@@ -136,6 +137,7 @@ top: 117.3, left: 17.6, width: 85.6, height: 79.5
 	}
 	
 	@Test
+	@Ignore
 	public void testCropping() {
 		PageCropper cropper = new PageCropper();
 		cropper.setTLBRUserMediaBox(new Real2(0, 800), new Real2(600, 0));
@@ -174,6 +176,72 @@ top: 117.3, left: 17.6, width: 85.6, height: 79.5
 		Assert.assertNotNull(svgElement);
 		SVGSVG.wrapAndWriteAsSVG(svgElement, new File(new File("target/crop/"), fileroot+".cropmmx.svg"));
 
+	}
+	
+	@Test
+	/** may move elsewhere later
+	 * assumes SVG files have been created in target.
+	 */
+	public void testCroppingArguments() {
+		File projectDir = new File("target/clipping/tracemonkey-pldi-09/");
+		File svgDir = new File("target/clipping/tracemonkey-pldi-09/svg/");
+		String fileroot = "fulltext-page"+1;
+		File inputFile = new File(svgDir, fileroot + ".svg");
+		Assert.assertTrue(""+inputFile+" exists", inputFile.exists());
+//		SVGElement svgElement = SVGElement.readAndCreateSVG(inputFile);
+		/**
+		double MM2PX = 72 / 25.4;
+		double x0 = 17.6; // mm
+		double width = 85.6; // mm
+		double x1 = x0 + width;
+//		double y0 = 117.3;
+		double y0 = (800 / MM2PX) - 117.3; // coordinate system wrong way up // mm
+		double height = 79.5; // mm
+		double y1 = y0 - height;
+		 */
+		String cmd = "--project "+projectDir +
+				" --cropbox x0 17.6 y0 117.3 width 85.6 height 79.5 ydown units mm "+
+				" --page 1 "+
+				" --mediabox x0 0 y0 0 width 600 height 800 ydown units px " +
+				" --output svg/crop1.2.svg"
+		;
+		Norma norma = new Norma();
+		norma.run(cmd);
+	}
+	
+	@Test
+	public void testCompleteDemo() {
+		File bmjDir = new File(NormaFixtures.TEST_DEMO_DIR, "bmj");
+		File targetDir = new File("target/demos/bmj/");
+		String cmd;
+		
+		CMineTestFixtures.cleanAndCopyDir(bmjDir, targetDir);
+		/** ignore while testing */
+		cmd = "--project "+targetDir+" --makeProject (\\1)/fulltext.pdf --fileFilter .*\\/(.*)\\.pdf";
+		new Norma().run(cmd);
+		cmd = "--project " + targetDir + " --input fulltext.pdf "+ " --outputDir " + targetDir + " --transform pdf2svg ";
+		new Norma().run(cmd);
+//		if (true) return;
+		/**
+    UCL-style inputs to crop out Table 4 (units in mm, y is downwards):
+    page: 10, top: 15.0, left: 13.0, width: 187.0, height: 60.0
+		 */
+		String outpath = "svg/crop10.1.svg";
+		cmd = "" +
+			"--project "+targetDir +
+			" --cropbox x0 13.0 y0 15.0 width 187.0 height 60.0 ydown units mm "+
+			" --pageNumbers 10 "+
+			" --mediabox x0 0 y0 0 width 600 height 800 ydown units px " +
+			" --output " + outpath;
+		new Norma().run(cmd);
+		File svgFile = new File("target/demos/bmj/10.1136.bmjopen-2016-12335/svg/crop10.1.svg");
+		Assert.assertTrue(svgFile.toString()+" exists", svgFile.exists());
+		SVGElement svgElement = SVGElement.readAndCreateSVG(svgFile);
+		Real2Range box = svgElement.getBoundingBox();
+		box = box.format(0);
+		Assert.assertEquals("box ", "((42.0,553.0),(48.0,195.0))" , box.toString());
+
+		// check that we can create the cTreeLIst (see factory)
 	}
 
 }
