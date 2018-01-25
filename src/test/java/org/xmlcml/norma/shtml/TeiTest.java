@@ -3,6 +3,7 @@ package org.xmlcml.norma.shtml;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 
 import javax.xml.transform.Result;
 import javax.xml.transform.Source;
@@ -13,7 +14,9 @@ import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 
 import org.junit.Test;
+import org.xmlcml.cproject.util.CMineGlobber;
 import org.xmlcml.cproject.util.CMineTestFixtures;
+import org.xmlcml.norma.Norma;
 import org.xmlcml.norma.NormaFixtures;
 import org.xmlcml.norma.pubstyle.PubstyleReader;
 import org.xmlcml.norma.xsl.TransformerWrapper;
@@ -68,14 +71,28 @@ public class TeiTest {
 	}
 
 	/** test TEI2HTML stylesheet
+	 * @throws IOException 
 	 * 
 	 */
 	@Test
-	public void testTEI2HTML() {
+	public void testTEI2HTML() throws IOException {
 		File sourceDir = NormaFixtures.TEST_GROBID_TEI_DIR;
-		File targetDir = new File("target/grobi/tei");
+		File targetDir = new File("target/grobid/tei");
 		CMineTestFixtures.cleanAndCopyDir(sourceDir, targetDir);
-//		String args = "--project "+targetDir+" -"
+		CMineGlobber globber = new CMineGlobber();
+		globber.setRegex(".*.xml");
+		globber.setLocation(targetDir.toString());
+		List<File> xmlFiles = globber.listFiles();
+		Assert.assertEquals(16, xmlFiles.size());
+		Norma.convertRawTEIXMLToProject(targetDir);
+		globber.setRegex(".*/fulltext\\.xml");
+		globber.setLocation(targetDir.toString());
+		xmlFiles = globber.listFiles();
+		Assert.assertEquals(16, xmlFiles.size());
+		
+		
+		String cmd = "--project "+targetDir + " --input fulltext.xml" + " --output fulltext.html "+" --transform grobid2html ";
+		new Norma().run(cmd);
 	}
 
 //	0807.3577.tei.xml
