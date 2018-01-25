@@ -42,6 +42,7 @@ import org.xmlcml.svg2xml.page.PageCropper;
 public class NormaArgProcessor extends CProjectArgProcessor {
 //	public class NormaArgProcessor extends DefaultArgProcessor {
 
+	private static final String FULLTEXT_PAGE_PREFIX = "fulltext-page";
 	private static final String DOT_PNG = ".png";
 	private static final String IMAGE = "image";
 	private static final String PNG = "png";
@@ -752,11 +753,15 @@ public class NormaArgProcessor extends CProjectArgProcessor {
 	}
 
 	private File createSVGPageFile(Integer pageNumber) {
+		if (currentCTree == null) {
+			throw new RuntimeException("null currentCTree; BUG");
+		}
+		LOG.debug("current tree: "+currentCTree);
 		File svgDir = new File(currentCTree.getDirectory(), "svg");
 		if (!svgDir.exists()) {
 			throw new RuntimeException("No SVG directory: "+svgDir);
 		}
-		File svgPageFile = new File(svgDir, "fulltext-page"+pageNumber+".svg");
+		File svgPageFile = new File(svgDir, FULLTEXT_PAGE_PREFIX+pageNumber+".svg");
 		if (!svgPageFile.exists()) {
 			throw new RuntimeException("No SVG directory: "+svgPageFile);
 		}
