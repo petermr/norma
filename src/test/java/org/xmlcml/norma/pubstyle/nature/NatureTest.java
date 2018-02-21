@@ -7,6 +7,7 @@ import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.xmlcml.norma.NormaFixtureRunner;
 import org.xmlcml.norma.NormaFixtures;
 
 @Ignore // closed access
@@ -31,11 +32,11 @@ public class NatureTest {
 
 	@Test
 	public void testHtml2Scholarly2StepConversion() {
-		NormaFixtures.copyToTargetRunTidyTransformWithStylesheetSymbolRoot(TEST1, TARGET, PUB0);
+		new NormaFixtureRunner().copyToTargetRunTidyTransformWithStylesheetSymbolRoot(TEST1, TARGET, PUB0);
 	}
 	@Test
 	public void testHtml2Scholarly2StepConversionClean() throws IOException {
-		NormaFixtures.tidyTransformAndClean(TEST1, TARGET1, PUB);
+		new NormaFixtureRunner().tidyTransformAndClean(TEST1, TARGET1, PUB);
 	}
 
 }

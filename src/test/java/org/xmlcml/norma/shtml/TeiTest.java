@@ -18,6 +18,7 @@ import org.xmlcml.cproject.util.CMineGlobber;
 import org.xmlcml.cproject.util.CMineTestFixtures;
 import org.xmlcml.norma.Norma;
 import org.xmlcml.norma.NormaFixtures;
+import org.xmlcml.norma.NormaRunner;
 import org.xmlcml.norma.pubstyle.PubstyleReader;
 import org.xmlcml.norma.xsl.TransformerWrapper;
 
@@ -76,6 +77,7 @@ public class TeiTest {
 	 */
 	@Test
 	public void testTEI2HTML() throws IOException {
+		NormaRunner normaRunner = new NormaRunner();
 		File sourceDir = NormaFixtures.TEST_GROBID_TEI_DIR;
 		File targetDir = new File("target/grobid/tei");
 		CMineTestFixtures.cleanAndCopyDir(sourceDir, targetDir);
@@ -84,12 +86,11 @@ public class TeiTest {
 		globber.setLocation(targetDir.toString());
 		List<File> xmlFiles = globber.listFiles();
 		Assert.assertEquals(16, xmlFiles.size());
-		Norma.convertRawTEIXMLToProject(targetDir);
+		normaRunner.convertRawTEIXMLToProject(targetDir);
 		globber.setRegex(".*/fulltext\\.xml");
 		globber.setLocation(targetDir.toString());
 		xmlFiles = globber.listFiles();
 		Assert.assertEquals(16, xmlFiles.size());
-		
 		
 		String cmd = "--project "+targetDir + " --input fulltext.xml" + " --output fulltext.html "+" --transform grobid2html ";
 		new Norma().run(cmd);

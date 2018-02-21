@@ -15,6 +15,10 @@ import org.xmlcml.euclid.Real2;
 import org.xmlcml.euclid.Real2Range;
 import org.xmlcml.graphics.svg.SVGElement;
 import org.xmlcml.graphics.svg.SVGSVG;
+import org.xmlcml.graphics.svg.SVGText;
+import org.xmlcml.graphics.svg.fonts.StyleRecordFactory;
+import org.xmlcml.graphics.svg.fonts.StyleRecordSet;
+import org.xmlcml.graphics.svg.fonts.TypefaceMaps;
 import org.xmlcml.norma.pubstyle.util.RegionFinder;
 import org.xmlcml.svg2xml.page.PageCropper;
 import org.xmlcml.svg2xml.page.PageCropper.Units;
@@ -301,10 +305,12 @@ top: 117.3, left: 17.6, width: 85.6, height: 79.5
 	@Test
 	@Ignore // NYworking
 	public void testGetBoxesByXPath() throws IOException {
+		NormaRunner normaRunner = new NormaRunner();
+
 		File projectDir = new File(NormaFixtures.TEST_DEMO_DIR, "lancet");
 		File targetDir = new File("target/demos/lancet/");
 		CMineTestFixtures.cleanAndCopyDir(projectDir, targetDir);
-		Norma.convertRawPDFToProjectToSVG(targetDir);
+		normaRunner.convertRawPDFToProjectToSVG(targetDir);
 		
 		RegionFinder regionFinder = new RegionFinder();
 		 // lancet
@@ -320,10 +326,11 @@ top: 117.3, left: 17.6, width: 85.6, height: 79.5
 	
 	@Test
 	public void testCTree() {
+		NormaRunner normaRunner = new NormaRunner();
 		File projectDir = new File(NormaFixtures.TEST_DEMO_DIR, "cert");
 		File targetDir = new File("target/demos/cert/");
 		CMineTestFixtures.cleanAndCopyDir(projectDir, targetDir);
-		Norma.convertRawPDFToProjectToSVG(targetDir);
+		normaRunner.convertRawPDFToProjectToSVG(targetDir);
 		File ctree = new File(targetDir, "Varga2001");
 		String outpath = "tables/table1b/table.svg";
 		String cmd = "" +
@@ -333,13 +340,14 @@ top: 117.3, left: 17.6, width: 85.6, height: 79.5
 			" --output " + outpath;
 		new Norma().run(cmd);
 	}
-		
+	
 	@Test
 	public void testTablesAndEquations() {
+		NormaRunner normaRunner = new NormaRunner();
 		File projectDir = new File(NormaFixtures.TEST_DEMO_DIR, "cert");
 		File targetDir = new File("target/demos/cert/");
 		CMineTestFixtures.cleanAndCopyDir(projectDir, targetDir);
-		Norma.convertRawPDFToProjectToSVG(targetDir);
+		normaRunner.convertRawPDFToProjectToSVG(targetDir);
 		
 		File ctreeDir; String cmd;
 		
@@ -347,15 +355,79 @@ top: 117.3, left: 17.6, width: 85.6, height: 79.5
 		cmd = "--ctree "+ctreeDir +
 			" --cropbox x0 32.0 y0 728.0 x1 578 y1 274 yup " + " --pageNumbers 3 "+" --output " + "tables/table1/table.svg";
 		new Norma().run(cmd);
-
+	
 		ctreeDir = new File(targetDir, "Varga2001");
 		cmd = "--ctree "+ctreeDir +
 			" --cropbox x0 70.0 y0 62.0 x1 460 y1 252 "+" --pageNumbers 3 "+" --output " + "tables/table1/table.svg";
 		new Norma().run(cmd);
-
+	
 		cmd = "--ctree "+ctreeDir +
 			" --cropbox x0 268 y0 481 x1 514 y1 255 yup "+" --pageNumbers 7 "+" --output " + "maths/maths1/maths.svg";
 		new Norma().run(cmd);
 	}
+
+	@Test
+	public void testPDFToCompactSVG() {
+		NormaRunner normaRunner = new NormaRunner();
+		File projectDir = new File(NormaFixtures.TEST_DEMO_DIR, "cert");
+		File targetDir = new File("target/demos/cert/");
+		CMineTestFixtures.cleanAndCopyDir(projectDir, targetDir);
+		normaRunner.convertRawPDFToProjectToCompactSVG(targetDir);
+		
+		File ctreeDir; String cmd;
+		
+		ctreeDir = new File(targetDir, "Timmermans_etal_2016_B_Cell_Crohns");
+		cmd = "--ctree "+ctreeDir +
+			" --cropbox x0 32.0 y0 728.0 x1 578 y1 274 yup " + " --pageNumbers 3 "+" --output " + "tables/table1/table.svg";
+		new Norma().run(cmd);
+		
+		ctreeDir = new File(targetDir, "Varga2001");
+		cmd = "--ctree "+ctreeDir +
+			" --cropbox x0 70.0 y0 62.0 x1 460 y1 252 "+" --pageNumbers 3 "+" --output " + "tables/table1/table.svg";
+		new Norma().run(cmd);
+		
+		cmd = "--ctree "+ctreeDir +
+			" --cropbox x0 268 y0 481 x1 514 y1 255 yup "+" --pageNumbers 7 "+" --output " + "maths/maths1/maths.svg";
+		new Norma().run(cmd);
+	}
+
+	@Test
+	public void testTypefaces() throws IOException {
+		NormaRunner normaRunner = new NormaRunner();
+		File projectDir = new File(NormaFixtures.TEST_DEMO_DIR, "cert");
+		File targetDir = new File("target/demos/cert/");
+		/**
+		CMineTestFixtures.cleanAndCopyDir(projectDir, targetDir);
+		normaRunner.convertRawPDFToProjectToCompactSVG(targetDir);
+		*/
+		File ctreeDir; String cmd;
+
+		CMineGlobber globber = new CMineGlobber();
+		globber.setRegex(".*/fulltext-page.*compact.svg");
+		globber.setLocation(targetDir.toString());
+		List<File> textFiles = globber.listFiles();
+		List<SVGText> svgTexts = SVGText.readAndCreateTexts(textFiles);
+		Assert.assertEquals(1746, svgTexts.size());
+		StyleRecordFactory styleRecordFactory = new StyleRecordFactory();
+		StyleRecordSet styleRecordSet = styleRecordFactory.createStyleRecordSet(svgTexts);
+		TypefaceMaps typefaceSet = styleRecordSet.extractTypefaceMaps("cert");
+		Assert.assertEquals(20, typefaceSet.size());
+		LOG.debug(typefaceSet);
+
+//		ctreeDir = new File(targetDir, "Timmermans_etal_2016_B_Cell_Crohns");
+//		cmd = "--ctree "+ctreeDir +
+//			" --cropbox x0 32.0 y0 728.0 x1 578 y1 274 yup " + " --pageNumbers 3 "+" --output " + "tables/table1/table.svg";
+//		new Norma().run(cmd);
+//		
+//		ctreeDir = new File(targetDir, "Varga2001");
+//		cmd = "--ctree "+ctreeDir +
+//			" --cropbox x0 70.0 y0 62.0 x1 460 y1 252 "+" --pageNumbers 3 "+" --output " + "tables/table1/table.svg";
+//		new Norma().run(cmd);
+//		
+//		cmd = "--ctree "+ctreeDir +
+//			" --cropbox x0 268 y0 481 x1 514 y1 255 yup "+" --pageNumbers 7 "+" --output " + "maths/maths1/maths.svg";
+//		new Norma().run(cmd);
+	}
+
 
 }

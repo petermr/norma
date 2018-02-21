@@ -6,6 +6,7 @@ import java.io.IOException;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.junit.Test;
+import org.xmlcml.norma.NormaFixtureRunner;
 import org.xmlcml.norma.NormaFixtures;
 
 public class IOPTest {
@@ -29,11 +30,11 @@ public class IOPTest {
 
 	@Test
 	public void testHtml2Scholarly2StepConversion() {
-		NormaFixtures.copyToTargetRunTidyTransformWithStylesheetSymbolRoot(TEST1, TARGET, PUB0);
+		new NormaFixtureRunner().copyToTargetRunTidyTransformWithStylesheetSymbolRoot(TEST1, TARGET, PUB0);
 	}
 	@Test
 	public void testHtml2Scholarly2StepConversionClean() throws IOException {
-		NormaFixtures.tidyTransformAndClean(TEST1, TARGET1, PUB);
+		new NormaFixtureRunner().tidyTransformAndClean(TEST1, TARGET1, PUB);
 	}
 
 }

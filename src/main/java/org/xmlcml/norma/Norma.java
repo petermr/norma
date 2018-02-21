@@ -1,7 +1,5 @@
 package org.xmlcml.norma;
 
-import java.io.File;
-
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.xmlcml.cproject.args.DefaultArgProcessor;
@@ -35,23 +33,5 @@ public class Norma {
 
 	public DefaultArgProcessor getArgProcessor() {
 		return argProcessor;
-	}
-
-	/** converts a projectDirectory to a project and the PDFs to SVG
-	 * 
-	 * @param projectDir
-	 */
-	public static void convertRawPDFToProjectToSVG(File projectDir) {
-		new Norma().run("--project "+projectDir+" --makeProject (\\1)/fulltext.pdf --fileFilter .*\\/(.*)\\.pdf");
-		new Norma().run("--project " + projectDir + " --input fulltext.pdf "+ " --outputDir " + projectDir + " --transform pdf2svg ");
-	}
-	
-	/** converts a projectDirectory to a project and the PDFs to SVG
-	 * 
-	 * @param projectDir
-	 */
-	public static void convertRawTEIXMLToProject(File projectDir) {
-		new Norma().run("--project "+projectDir+" --makeProject (\\1)/fulltext.xml --fileFilter .*\\/(.*)\\.xml");
-//		new Norma().run("--project " + projectDir + " --input fulltext.tei.xml "+ " --outputDir " + projectDir + " --transform tei2html ");
 	}
 }

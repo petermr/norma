@@ -232,7 +232,7 @@ public class NormaArgProcessorTest {
 		CTree cTree = cTreeList.get(0);
 		List<File> files = cTree.listFiles(true);
 		LOG.trace(files);
-		Assert.assertEquals(5, files.size());
+		Assert.assertEquals(4, files.size());
 	}
 
 	@Test

@@ -13,6 +13,7 @@ import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.xmlcml.norma.NormaFixtureRunner;
 import org.xmlcml.norma.NormaFixtures;
 
 import net.sf.saxon.TransformerFactoryImpl;
@@ -43,14 +44,14 @@ public class RSTest {
 	@Test
 	@Ignore // closed access papers
 	public void testHtml2Scholarly2StepConversion() {
-		NormaFixtures.copyToTargetRunTidyTransformWithStylesheetSymbolRoot(TEST1, TARGET, PUB0);
+		new NormaFixtureRunner().copyToTargetRunTidyTransformWithStylesheetSymbolRoot(TEST1, TARGET, PUB0);
 	}
 	
 	@Test
 	@Ignore // closed access papers
 
 	public void testHtml2Scholarly2StepConversionClean() throws IOException {
-		NormaFixtures.tidyTransformAndClean(TEST1, TARGET1, PUB);
+		new NormaFixtureRunner().tidyTransformAndClean(TEST1, TARGET1, PUB);
 	}
 	
 	

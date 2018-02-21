@@ -10,6 +10,7 @@ import org.junit.Test;
 import org.xmlcml.cproject.args.DefaultArgProcessor;
 import org.xmlcml.cproject.util.CMineTestFixtures;
 import org.xmlcml.norma.NormaArgProcessor;
+import org.xmlcml.norma.NormaFixtureRunner;
 import org.xmlcml.norma.NormaFixtures;
 
 public class TFTest {
@@ -33,12 +34,12 @@ public class TFTest {
 
 	@Test
 	public void testHtml2Scholarly2StepConversion() {
-		NormaFixtures.copyToTargetRunTidyTransformWithStylesheetSymbolRoot(TEST1, TARGET, PUB0);
+		new NormaFixtureRunner().copyToTargetRunTidyTransformWithStylesheetSymbolRoot(TEST1, TARGET, PUB0);
 	}
 	
 	@Test
 	public void testHtml2Scholarly2StepConversionClean() throws IOException {
-		NormaFixtures.tidyTransformAndClean(TEST1, TARGET1, PUB);
+		new NormaFixtureRunner().tidyTransformAndClean(TEST1, TARGET1, PUB);
 	}
 	
 
