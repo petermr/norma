@@ -120,6 +120,10 @@ public class NormaFixtures {
 	public final static File TARGET_DIR = new File("target");
 	public final static File TARGET_PUBSTYLE_DIR = new File(TARGET_DIR, "pubstyle");
 
+	private static final File DEMO_DIR = new File("./demo");
+	public static final File MOSQUITOS_DIR = new File(NormaFixtures.DEMO_DIR, "mosquitos/");
+;
+
 	public static void copyToTargetRunHtmlTidy(File from, File to) {
 		CMineTestFixtures.cleanAndCopyDir(from, to);
 		String args = "--project "+to+" -i fulltext.html -o scholarly.html --html jsoup";

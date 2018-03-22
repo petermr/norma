@@ -6,9 +6,14 @@ import java.io.FileOutputStream;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.xmlcml.graphics.html.HtmlElement;
+import org.xmlcml.graphics.html.HtmlFooter;
+import org.xmlcml.graphics.html.HtmlHeader;
+import org.xmlcml.graphics.html.HtmlTitle;
 import org.xmlcml.graphics.svg.text.structure.TextStructurer;
 import org.xmlcml.svg2xml.table.TableContentCreator;
 import org.xmlcml.xml.XMLUtil;
+
+import com.gargoylesoftware.htmlunit.html.HtmlBody;
 
 public class SVGTable2HTMLConverter {
 	private static final Logger LOG = Logger.getLogger(SVGTable2HTMLConverter.class);
@@ -21,10 +26,10 @@ public class SVGTable2HTMLConverter {
 	private File outputFile;
 	private TableContentCreator tableContentCreator;
 	private File outputDir;
-	private HtmlElement bodyElement;
-	public HtmlElement titleElement;
-	private HtmlElement headerElement;
-	private HtmlElement footerElement;
+	private HtmlBody bodyElement;
+	public HtmlTitle titleElement;
+	private HtmlHeader headerElement;
+	private HtmlFooter footerElement;
 	private TextStructurer textStructurer;
 	private HtmlElement outputHtmlElement;
 
@@ -62,19 +67,19 @@ public class SVGTable2HTMLConverter {
 		}
 	}
 
-	public HtmlElement getBodyElement() {
+	public HtmlBody getBodyElement() {
 		return bodyElement;
 	}
 
-	public HtmlElement getTitleElement() {
+	public HtmlTitle getTitleElement() {
 		return titleElement;
 	}
 
-	public HtmlElement getHeaderElement() {
+	public HtmlHeader getHeaderElement() {
 		return headerElement;
 	}
 
-	public HtmlElement getFooterElement() {
+	public HtmlFooter getFooterElement() {
 		return footerElement;
 	}
 }

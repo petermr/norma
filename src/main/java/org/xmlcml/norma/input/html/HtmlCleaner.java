@@ -8,6 +8,7 @@ import org.apache.log4j.Logger;
 import org.xmlcml.cproject.files.CTree;
 import org.xmlcml.graphics.html.HtmlElement;
 import org.xmlcml.graphics.html.HtmlFactory;
+import org.xmlcml.graphics.svg.SVGConstants;
 import org.xmlcml.norma.NormaArgProcessor;
 import org.xmlcml.xml.XMLUtil;
 

@@ -7,6 +7,7 @@ import org.apache.log4j.Logger;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.xmlcml.cproject.util.CMineTestFixtures;
+import org.xmlcml.graphics.AbstractCMElement;
 import org.xmlcml.graphics.svg.SVGElement;
 import org.xmlcml.graphics.svg.plot.AbstractPlotBox;
 import org.xmlcml.graphics.svg.plot.XYPlotBox;
@@ -197,7 +198,7 @@ multipleTreesSingleFigure/
 				return;
 			}
 			LOG.debug(svgFile.getAbsolutePath());
-			SVGElement svgElement = SVGElement.readAndCreateSVG(svgFile);
+			AbstractCMElement svgElement = SVGElement.readAndCreateSVG(svgFile);
 			XYPlotBox plotBox = new XYPlotBox();
 			plotBox.setSvgOutFile(new File(new File("target/scatterplots/"), ctree+".out.svg"));
 			plotBox.setCsvOutFile(new File(new File("target/scatterplots/"), ctree+".out.csv"));

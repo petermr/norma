@@ -50,13 +50,13 @@ public class PDF2XHTMLConverter {
 
 	public HtmlElement readAndConvertToXHTML(URL url) throws Exception {
 	     List<SVGSVG> svgList = readAndConvertToSVGList(url);
-	 	 HtmlElement htmlElement = readAndConvertToXHTML(svgList);
+	     HtmlElement htmlElement = readAndConvertToXHTML(svgList);
 	 	 return htmlElement;
 	}
 
 	public HtmlElement readAndConvertToXHTML(InputStream is) throws Exception {
 	     List<SVGSVG> svgList = readAndConvertToSVGList(is);
-	 	 HtmlElement htmlElement = readAndConvertToXHTML(svgList);
+	     HtmlElement htmlElement = readAndConvertToXHTML(svgList);
 	 	 return htmlElement;
 	}
 

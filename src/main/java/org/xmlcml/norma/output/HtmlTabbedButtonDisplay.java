@@ -209,7 +209,7 @@ public class HtmlTabbedButtonDisplay extends HtmlHtml {
 		
 	}
 
-	public HtmlElement getOrCreateH1Title() {
+	public HtmlH1 getOrCreateH1Title() {
 		HtmlH1 h1 = null;
 		Element element = XMLUtil.getSingleElement(getOrCreateBody(), ".//*[local-name()='"+HtmlH1.TAG+"']");
 		if (element == null) {

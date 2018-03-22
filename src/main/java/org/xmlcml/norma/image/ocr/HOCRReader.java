@@ -19,6 +19,7 @@ import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.xmlcml.euclid.Real2;
 import org.xmlcml.euclid.Real2Range;
+import org.xmlcml.graphics.AbstractCMElement;
 import org.xmlcml.graphics.html.HtmlBody;
 import org.xmlcml.graphics.html.HtmlDiv;
 import org.xmlcml.graphics.html.HtmlElement;
@@ -242,7 +243,7 @@ public class HOCRReader extends InputReader {
 		rawBody = rawHtml.getBody();
 	}
 
-	public HtmlElement getHead() {
+	public HtmlHead getHead() {
 		return rawHead;
 	}
 	public List<HtmlMeta> getMetaElements() {
@@ -628,7 +629,7 @@ public class HOCRReader extends InputReader {
 		return newImage;
 	}
 
-	public List<HOCRLabel> getOrCreatePotentialLabelElements(SVGElement svgElement) {
+	public List<HOCRLabel> getOrCreatePotentialLabelElements(AbstractCMElement svgElement) {
 		if (potentialLabelList == null) {
 			List <SVGElement> labelledGs = SVGUtil.getQuerySVGElements(
 					svgElement, "//*[local-name()='g' and contains(@class, '"+POTENTIAL_LABEL+"')]");
@@ -645,11 +646,11 @@ public class HOCRReader extends InputReader {
 	}
 
 	
-	public List<HOCRPhrase> getOrCreatePotentialPhraseElements(SVGElement svgElement) {
+	public List<HOCRPhrase> getOrCreatePotentialPhraseElements(AbstractCMElement svgElement) {
 		List <SVGElement> lineGs = SVGUtil.getQuerySVGElements(
 				svgElement, "//*[local-name()='g' and contains(@class, '"+LINE+"')]");
 		potentialPhraseList = new ArrayList<HOCRPhrase>();
-		for (SVGElement lineG : lineGs) {
+		for (AbstractCMElement lineG : lineGs) {
 			List<SVGElement> words = SVGUtil.getQuerySVGElements(
 					lineG, "*[local-name()='g' and contains(@class,'"+WORD+"')]");
 			List<HOCRPhrase> linePhraseList = new ArrayList<HOCRPhrase>();
@@ -708,12 +709,12 @@ public class HOCRReader extends InputReader {
 	}
 
 	
-	public List<HOCRText> getOrCreatePotentialTextElements(SVGElement svgElement) {
+	public List<HOCRText> getOrCreatePotentialTextElements(AbstractCMElement svgElement) {
 		if (potentialTextList == null) {
 			List <SVGElement> textGs = SVGUtil.getQuerySVGElements(
 					svgElement, "//*[local-name()='g' and not(contains(@class, '"+POTENTIAL_LABEL+"')) and *[local-name()='text']]");
 			potentialTextList = new ArrayList<HOCRText>();
-			for (SVGElement textG : textGs) {
+			for (AbstractCMElement textG : textGs) {
 				SVGText text = SVGText.extractSelfAndDescendantTexts(textG).get(0);
 				potentialTextList.add(new HOCRText((SVGG)textG));
 			}

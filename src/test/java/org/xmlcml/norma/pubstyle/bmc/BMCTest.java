@@ -1,6 +1,7 @@
 package org.xmlcml.norma.pubstyle.bmc;
 
 import java.awt.Dimension;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.HashMap;
@@ -15,6 +16,7 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.xmlcml.cproject.files.CTree;
 import org.xmlcml.euclid.Real2;
+import org.xmlcml.graphics.AbstractCMElement;
 import org.xmlcml.graphics.html.HtmlElement;
 import org.xmlcml.graphics.html.HtmlFactory;
 import org.xmlcml.graphics.html.util.HtmlUtil;
@@ -77,7 +79,7 @@ public class BMCTest {
 	// 4 boxes and three lines
 	@Ignore // NPE somehwere in SVGDiagram
 	public void testExtractFlowChart() {
-		SVGElement rawChart = SVGElement.readAndCreateSVG(new File(NormaFixtures.BMC_MISC_DIR, "1745-6215-15-486.29.0.svg"));
+		AbstractCMElement rawChart = SVGElement.readAndCreateSVG(new File(NormaFixtures.BMC_MISC_DIR, "1745-6215-15-486.29.0.svg"));
 		SVGBoxChart boxChart = new SVGBoxChart(rawChart);
 		boxChart.createChart();
 		List<SVGPath> pathList = boxChart.getSVGPathList();
@@ -127,7 +129,7 @@ public class BMCTest {
 			Dimension dim = path.getBoundingBox().format(1).getDimension();
 			double h = dim.getHeight();
 			if (h <= 15 && dim.getWidth() <= 15) {
-				String dString = path.createSignatureFromDStringPrimitives();
+				String dString = path.getOrCreateSignatureAttributeValue();
 				String character = characterByDStringMap.get(dString);
 				path.detach();
 				path.setStrokeWidth(0.1);
@@ -135,7 +137,7 @@ public class BMCTest {
 				g.appendChild(path);
 				if ("?".equals(character)) {
 					path.setOpacity(0.0);
-					signatureSet.add(path.createSignatureFromDStringPrimitives());
+					signatureSet.add(path.getOrCreateSignatureAttributeValue());
 				} else {
 					deltay = (h < 10) ? fontSize * 0.60 : fontSize * 0.8;
 					path.setOpacity(0.3);

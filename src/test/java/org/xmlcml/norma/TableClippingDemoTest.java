@@ -13,6 +13,7 @@ import org.xmlcml.cproject.util.CMineGlobber;
 import org.xmlcml.cproject.util.CMineTestFixtures;
 import org.xmlcml.euclid.Real2;
 import org.xmlcml.euclid.Real2Range;
+import org.xmlcml.graphics.AbstractCMElement;
 import org.xmlcml.graphics.svg.SVGElement;
 import org.xmlcml.graphics.svg.SVGSVG;
 import org.xmlcml.graphics.svg.SVGText;

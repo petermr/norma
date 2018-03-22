@@ -28,6 +28,7 @@ import org.xmlcml.cproject.files.CTree;
 import org.xmlcml.cproject.files.ResourceLocation;
 import org.xmlcml.cproject.util.RectangularTable;
 import org.xmlcml.cproject.util.Utils;
+import org.xmlcml.graphics.AbstractCMElement;
 import org.xmlcml.graphics.html.HtmlElement;
 import org.xmlcml.graphics.html.HtmlFactory;
 import org.xmlcml.graphics.html.HtmlTable;
@@ -49,8 +50,6 @@ import org.xmlcml.norma.tagger.SectionTaggerX;
 import org.xmlcml.norma.xsl.TransformerWrapper;
 import org.xmlcml.svg2xml.pdf.PDFAnalyzer;
 import org.xmlcml.svg2xml.pdf.PDFAnalyzerIO;
-//import org.xmlcml.svg2xml.pdf.PDFAnalyzer;
-//import org.xmlcml.svg2xml.pdf.PDFAnalyzerIO;
 import org.xmlcml.xml.XMLUtil;
 
 import nu.xom.Builder;
@@ -586,7 +585,7 @@ public class NormaTransformer {
 		} catch (IOException e) {
 			throw new RuntimeException("Cannot convert SVG: ", e);
 		}
-		return (SVGElement) svgElement;
+		return svgElement;
 	}
 
 	private String applyPDF2SVGToCurrentInputFile(File inputFile, File outputDirectory) {

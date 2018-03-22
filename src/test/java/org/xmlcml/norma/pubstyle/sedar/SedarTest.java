@@ -1,14 +1,13 @@
 package org.xmlcml.norma.pubstyle.sedar;
 
 import java.io.File;
-import java.io.FileOutputStream;
 
-import org.apache.jempbox.impl.XMLUtil;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.xmlcml.graphics.AbstractCMElement;
 import org.xmlcml.graphics.html.HtmlElement;
 import org.xmlcml.graphics.svg.SVGElement;
 import org.xmlcml.graphics.svg.objects.SVGBoxChart;
@@ -34,7 +33,7 @@ public class SedarTest {
 	@Test
 	@Ignore // file // throw NPE somewhere
 	public void testExtractOrgChart() {
-		SVGElement rawChart = SVGElement.readAndCreateSVG(new File(NormaFixtures.TEST_SEDAR_DIR, "westernZagros.g.11.7.svg"));
+		AbstractCMElement rawChart = SVGElement.readAndCreateSVG(new File(NormaFixtures.TEST_SEDAR_DIR, "westernZagros.g.11.7.svg"));
 		Assert.assertNotNull(rawChart);
 		SVGBoxChart boxChart = new SVGBoxChart(rawChart);
 		boxChart.createChart();
@@ -44,7 +43,7 @@ public class SedarTest {
 	@Test
 	@Ignore
 	public void testExtractOrgChartBlackbird() {
-		SVGElement rawChart = SVGElement.readAndCreateSVG(new File(NormaFixtures.TEST_SEDAR_DIR, "blackbird.g.8.8.svg"));
+		AbstractCMElement rawChart = SVGElement.readAndCreateSVG(new File(NormaFixtures.TEST_SEDAR_DIR, "blackbird.g.8.8.svg"));
 		SVGBoxChart boxChart = new SVGBoxChart(rawChart);
 		boxChart.createChart();
 		
@@ -53,7 +52,7 @@ public class SedarTest {
 	@Test
 	@Ignore
 	public void testExtractOrgChartPennWest() {
-		SVGElement rawChart = SVGElement.readAndCreateSVG(new File(NormaFixtures.TEST_SEDAR_DIR, "pennwest.g.11.1.svg"));
+		AbstractCMElement rawChart = SVGElement.readAndCreateSVG(new File(NormaFixtures.TEST_SEDAR_DIR, "pennwest.g.11.1.svg"));
 		SVGBoxChart boxChart = new SVGBoxChart(rawChart);
 		boxChart.createChart();
 		
@@ -62,7 +61,7 @@ public class SedarTest {
 	@Test
 	@Ignore
 	public void testExtractOrgChartRooster() {
-		SVGElement rawChart = SVGElement.readAndCreateSVG(new File(NormaFixtures.TEST_SEDAR_DIR, "rooster.g.7.6.svg"));
+		AbstractCMElement rawChart = SVGElement.readAndCreateSVG(new File(NormaFixtures.TEST_SEDAR_DIR, "rooster.g.7.6.svg"));
 		SVGBoxChart boxChart = new SVGBoxChart(rawChart);
 		boxChart.createChart();
 		

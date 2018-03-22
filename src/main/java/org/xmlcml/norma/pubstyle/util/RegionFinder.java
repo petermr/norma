@@ -5,8 +5,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.plaf.synth.Region;
-
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.xmlcml.cproject.util.CMineGlobber;
@@ -77,6 +75,13 @@ public class RegionFinder {
 		this.outdir = outdir;
 	}
 
+	/** this is a mess.
+	 * It shouldn't involve searching for files
+	 * 
+	 * @param ctreeDirectory
+	 * @return
+	 * @throws IOException
+	 */
 	public List<PageRegion> findRegions(File ctreeDirectory) throws IOException {
 		this.ctreeDirectory = ctreeDirectory;
 		pageRegionList = new ArrayList<PageRegion>();

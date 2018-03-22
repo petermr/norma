@@ -12,6 +12,7 @@ import org.xmlcml.cproject.files.CTree;
 import org.xmlcml.cproject.files.RegexPathFilter;
 import org.xmlcml.cproject.util.Utils;
 import org.xmlcml.euclid.Util;
+import org.xmlcml.graphics.AbstractCMElement;
 import org.xmlcml.graphics.html.HtmlElement;
 import org.xmlcml.graphics.html.HtmlImg;
 import org.xmlcml.graphics.html.HtmlP;
@@ -122,7 +123,7 @@ public class HtmlDisplay {
 		if (file == null) {
 			td.appendChild(new HtmlP("null file"));
 		} else if (filename.endsWith(".svg")) {
-			SVGElement svgElement = createSVG(file);
+			AbstractCMElement svgElement = createSVG(file);
 			td.appendChild(svgElement);
 		} else if (filename.endsWith(".png")) {
 			HtmlImg img = createHtmlImg(file.getName());
