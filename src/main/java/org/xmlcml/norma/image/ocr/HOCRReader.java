@@ -403,7 +403,7 @@ public class HOCRReader extends InputReader {
 				largeText = true;
 			}
 			svgLine.setFontSize(fontSize);
-			svgLine.setClassName(LINE);
+			svgLine.setSVGClassName(LINE);
 			Elements childs = lineSpan.getChildElements();
 			for (int i = 0; i < childs.size(); i++) {
 				Element child = childs.get(i);
@@ -498,7 +498,7 @@ public class HOCRReader extends InputReader {
 				rect.setFill(UNEDITED_COL);
 				rect.setOpacity(RECT_OPACITY);
 				svgWord.appendChild(rect);
-				svgWord.setClassName(WORD);
+				svgWord.setSVGClassName(WORD);
 				Elements childs = htmlSpan0.getChildElements();
 				int nchild = childs.size();
 				if (nchild > 1) {
