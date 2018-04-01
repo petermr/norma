@@ -1,7 +1,6 @@
 package org.xmlcml.norma.pubstyle.bmc;
 
 import java.awt.Dimension;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.HashMap;
@@ -15,6 +14,7 @@ import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.xmlcml.cproject.files.CTree;
+import org.xmlcml.cproject.util.CMineTestFixtures;
 import org.xmlcml.euclid.Real2;
 import org.xmlcml.graphics.AbstractCMElement;
 import org.xmlcml.graphics.html.HtmlElement;
@@ -53,6 +53,19 @@ public class BMCTest {
 		
 	}
 	
+	@Test
+	public void testBMCHTML() {
+		File targetDir = new File("target/demos/bmc/");
+		Assert.assertTrue(NormaFixtures.MOSQUITOS_DIR.exists());
+		CMineTestFixtures.cleanAndCopyDir(new File(NormaFixtures.TEST_DEMOS_DIR, "bmc"), targetDir);
+		String args = "--project "+targetDir+" -i fulltext.xhtml "+" --outputDir "+targetDir+" --transform  bmc2html" +
+		// the --output is required, even though the name is not used // FIXME
+		    " --output junk.html";
+		LOG.debug("args "+args);
+		new Norma().run(args);
+//		args = "--project "+targetDir+" -i scholarly.html "+" --outputDir "+targetDir+
+//				" --transform sections";
+	}
 
 	@Test
 	@Ignore // too long - creates the SVG // file missing

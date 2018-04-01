@@ -1,10 +1,13 @@
 <stylesheetList>
-  <stylesheet name="bmc2html">/org/xmlcml/norma/pubstyle/bmc/xml2html.xsl</stylesheet>
+<!--  this may no longer be offered by BMC -->
+  <stylesheet name="bmcxml2html">/org/xmlcml/norma/pubstyle/bmc/xml2html.xsl</stylesheet>
+
   <stylesheet name="ncbi-jats2html">/org/xmlcml/norma/pubstyle/nlm/ncbi/jats-html.xsl</stylesheet>
   <stylesheet name="jats2shtml">/org/xmlcml/norma/pubstyle/nlm/jats/jats2shtml.xsl</stylesheet>
-  <stylesheet name="nature2html">/org/xmlcml/norma/pubstyle/nature/toHtml.xsl</stylesheet>
+
   <stylesheet name="hind2xml">/org/xmlcml/norma/pubstyle/hindawi/groupMajorSections.xsl</stylesheet>
-  
+
+  <stylesheet name="bmc2html">/org/xmlcml/norma/pubstyle/bmc/toHtml.xsl</stylesheet>
   <stylesheet name="acs2html">/org/xmlcml/norma/pubstyle/acs/toHtml.xsl</stylesheet>
   <stylesheet name="aip2html">/org/xmlcml/norma/pubstyle/aip/toHtml.xsl</stylesheet>
   <stylesheet name="apa2html">/org/xmlcml/norma/pubstyle/apa/toHtml.xsl</stylesheet>

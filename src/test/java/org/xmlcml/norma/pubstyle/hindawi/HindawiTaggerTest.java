@@ -45,14 +45,14 @@ public class HindawiTaggerTest {
 	}
 	
 	@Test
-	// FIXME
-	@Ignore // Jenkins fail NoSuchMethod 
+	// not quite sure what this does
 	public void testGrouping() throws Exception {
 		File outfile = new File("target/hindawi/507405.grouped.xml");
 		TransformerWrapper transformerWrapper = new TransformerWrapper();
 	    transformerWrapper.transform(NormaFixtures.F507405_XML, NormaFixtures.GROUP_MAJOR_SECTIONS_XSL, outfile);
 	    XMLUtil.equalsCanonically(NormaFixtures.F507405_GROUPED_XHTML, outfile, true);
-
+	    
+	    Assert.assertTrue("exists: "+outfile, outfile.exists());
 	}
 
 	@Test

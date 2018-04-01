@@ -40,7 +40,7 @@ public class TableClippingDemoTest {
 	@Test
 	public void testTotalClippingWorkflow() throws IOException {
 		String root = "tracemonkey-pldi-09";
-		File tmFile = NormaFixtures.TEST_DEMO_DIR;
+		File tmFile = NormaFixtures.TEST_DEMOS_DIR;
 		Assert.assertTrue(""+tmFile, tmFile.exists());
 		File targetDir = new File("target/clipping/");
 		CMineTestFixtures.cleanAndCopyDir(tmFile, targetDir);
@@ -219,7 +219,7 @@ top: 117.3, left: 17.6, width: 85.6, height: 79.5
 	
 	@Test
 	public void testCompleteDemo() {
-		File bmjDir = new File(NormaFixtures.TEST_DEMO_DIR, "bmj");
+		File bmjDir = new File(NormaFixtures.TEST_DEMOS_DIR, "bmj");
 		File targetDir = new File("target/demos/bmj/");
 		String cmd;
 		
@@ -270,7 +270,7 @@ top: 117.3, left: 17.6, width: 85.6, height: 79.5
 
 	@Test
 	public void testGetRegionByXPath() throws IOException {
-		File svgDir = new File(NormaFixtures.TEST_DEMO_DIR, "bmj/svg");
+		File svgDir = new File(NormaFixtures.TEST_DEMOS_DIR, "bmj/svg");
 		CMineGlobber globber = new CMineGlobber();
 		globber.setRegex(".*/bmj/svg/" + FULLTEXT_PAGE + "\\d+\\.svg");
 		globber.setLocation(svgDir.toString());
@@ -308,7 +308,7 @@ top: 117.3, left: 17.6, width: 85.6, height: 79.5
 	public void testGetBoxesByXPath() throws IOException {
 		NormaRunner normaRunner = new NormaRunner();
 
-		File projectDir = new File(NormaFixtures.TEST_DEMO_DIR, "lancet");
+		File projectDir = new File(NormaFixtures.TEST_DEMOS_DIR, "lancet");
 		File targetDir = new File("target/demos/lancet/");
 		CMineTestFixtures.cleanAndCopyDir(projectDir, targetDir);
 		normaRunner.convertRawPDFToProjectToSVG(targetDir);
@@ -328,7 +328,7 @@ top: 117.3, left: 17.6, width: 85.6, height: 79.5
 	@Test
 	public void testCTree() {
 		NormaRunner normaRunner = new NormaRunner();
-		File projectDir = new File(NormaFixtures.TEST_DEMO_DIR, "cert");
+		File projectDir = new File(NormaFixtures.TEST_DEMOS_DIR, "cert");
 		File targetDir = new File("target/demos/cert/");
 		CMineTestFixtures.cleanAndCopyDir(projectDir, targetDir);
 		normaRunner.convertRawPDFToProjectToSVG(targetDir);
@@ -345,7 +345,7 @@ top: 117.3, left: 17.6, width: 85.6, height: 79.5
 	@Test
 	public void testTablesAndEquations() {
 		NormaRunner normaRunner = new NormaRunner();
-		File projectDir = new File(NormaFixtures.TEST_DEMO_DIR, "cert");
+		File projectDir = new File(NormaFixtures.TEST_DEMOS_DIR, "cert");
 		File targetDir = new File("target/demos/cert/");
 		CMineTestFixtures.cleanAndCopyDir(projectDir, targetDir);
 		normaRunner.convertRawPDFToProjectToSVG(targetDir);
@@ -370,7 +370,7 @@ top: 117.3, left: 17.6, width: 85.6, height: 79.5
 	@Test
 	public void testPDFToCompactSVG() {
 		NormaRunner normaRunner = new NormaRunner();
-		File projectDir = new File(NormaFixtures.TEST_DEMO_DIR, "cert");
+		File projectDir = new File(NormaFixtures.TEST_DEMOS_DIR, "cert");
 		File targetDir = new File("target/demos/cert/");
 		CMineTestFixtures.cleanAndCopyDir(projectDir, targetDir);
 		normaRunner.convertRawPDFToProjectToCompactSVG(targetDir);
@@ -395,7 +395,7 @@ top: 117.3, left: 17.6, width: 85.6, height: 79.5
 	@Test
 	public void testTypefaces() throws IOException {
 		NormaRunner normaRunner = new NormaRunner();
-		File projectDir = new File(NormaFixtures.TEST_DEMO_DIR, "cert");
+		File projectDir = new File(NormaFixtures.TEST_DEMOS_DIR, "cert");
 		File targetDir = new File("target/demos/cert/");
 		/**
 		CMineTestFixtures.cleanAndCopyDir(projectDir, targetDir);

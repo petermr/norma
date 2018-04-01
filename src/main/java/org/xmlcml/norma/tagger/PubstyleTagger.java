@@ -27,6 +27,7 @@ import nu.xom.XPathContext;
 public class PubstyleTagger {
 
 	
+
 	private static final Logger LOG = Logger.getLogger(PubstyleTagger.class);
 	static {
 		LOG.setLevel(Level.DEBUG);
@@ -72,10 +73,10 @@ public class PubstyleTagger {
 		
 		
 		};
-	protected static final String PUBSTYLE = "pubstyle";
 	
-//	protected static final File PUBSTYLE_DIR = new File(NORMA_DIR, "pubstyle");
-	protected static final String PUBSTYLE_RESOURCE = NORMA_RESOURCE + "/"+ "pubstyle";
+	private static final String PUBSTYLE = "pubstyle";
+	protected static final String PUBSTYLE_RESOURCE = NORMA_RESOURCE + "/"+ PUBSTYLE;
+	protected static final String HTML_TAGGER_XML = "htmlTagger.xml";
 
 	public static final String TAG = "tagger";
 	private static final String STYLESHEET = "stylesheet";

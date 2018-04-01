@@ -54,7 +54,10 @@
 	    <variable name="middleContent">{$body}/h:div[@id='container']/h:div[@id='content']/h:div[@class='middle_content']</variable>
 	    <variable name="middleXmlContent">{$middleContent}/h:div/h:div[@class='xml-content']</variable>
 
-<!-- uses Xpath 1.0, so cannot use regex matches(a,b,c) etc -->
+<!-- uses Xpath 1.0, so cannot use regex matches(a,b,c) etc 
+specific to Hindawi as uses section/title as context
+-->
+
 		<tag name="abstract">{$middleXmlContent}/h:section[@title='Abstract']</tag> <!--  checked -->
 		<tag name="copyright">{$middleXmlContent}/h:section/h:p[contains(.,'Copyright')]</tag> <!--  checked -->
 		<tag name="background">{$middleXmlContent}/h:section[contains(@title,'Introduction')]</tag> <!--  checked -->
@@ -67,6 +70,7 @@
 		<tag name="competing">{$middleXmlContent}/h:section[contains(@title,'Conflict of Interests')]</tag> <!--  checked -->
 		<tag name="references">{$middleContent}//h:section[contains(@title,'References')]</tag> <!--  checked -->
 		<tag name="methods">{$middleXmlContent}/h:section[contains(@title,'Materials and Methods')]</tag> <!--  checked -->
+		
 		<tag name="table">{$middleXmlContent}//h:div[@class='fig' and starts-with(@id, 'tab')]/h:div[@class='groupcaption']</tag>
 		<tag name="figure">{$middleXmlContent}//*[@class='fig']/*[@class='groupcaption' and starts-with(.,'Figure ')]</tag> 
 		<!-- 
@@ -77,6 +81,8 @@
 		-->
 	</tagList>
 	<metadataList>
+	<!-- I think we can omit the full address and just use meta -->
+	<!-- 
 		<metadata name="doi">/h:html/h:head/h:meta[@name='citation_doi']/@content</metadata>
 		<metadata name="language">/h:html/h:head/h:meta[@name='dc.language']/@content</metadata>
 		<metadata name="format">/h:html/h:head/h:meta[@name='dc.format']/@content</metadata>
@@ -97,8 +103,6 @@
 		</metadata>
 		<metadata name="title">/h:html/h:head/h:meta[@name='dc.title']/@content</metadata>
 		<metadata name="title">/h:html/h:head/h:meta[@name='citation_title']/@content</metadata>
-		<metadata name="title">/h:html/h:body/div[@id='container']/div[@id='content']/div[@class='middle_content']/div/div[@class='article_type']/text()
-		</metadata>
 		<metadata name="volume">/h:html/h:head/h:meta[@name='citation_volume']/@content</metadata>
 		<metadata name="date">/h:html/h:head/h:meta[@name='dcterms.issued']/@content</metadata>
 		<metadata name="date">/h:html/h:head/h:meta[@name='citation_date']/@content</metadata>
@@ -108,12 +112,50 @@
 		<metadata name="doi">/h:html/h:head/h:meta[@name='citation_doi']/@content</metadata>
 		<metadata name="doi">/h:html/h:head/h:meta[@name='prism.doi']/@content</metadata>
 		<metadata name="doi">/h:html/h:head/h:meta[@name='dc.identifier']/@content</metadata>
-		<metadata name="doi">/h:html/h:body/div[@id='container']/div[@id='content']/div[@class='middle_content']/div/pre/a[@href]/text()
-		</metadata>
 		<metadata name="abstract">/h:html/h:head/h:meta[@name='citation_abstract']/@content</metadata>
 		<metadata name="abstract">/h:html/h:head/h:meta[@name='dc.description']/@content</metadata>
 		<metadata name="type">/h:html/h:head/h:meta[@name='prism.section']/@content</metadata>
 		<metadata name="type">/h:html/h:head/h:meta[@name='dc.type']/@content</metadata>
+-->		
+		<metadata name="doi">//h:meta[@name='citation_doi']/@content</metadata>
+		<metadata name="language">//h:meta[@name='dc.language']/@content</metadata>
+		<metadata name="format">//h:meta[@name='dc.format']/@content</metadata>
+		<metadata name="volume">//h:meta[@name='prism.volume']/@content</metadata>
+		<metadata name="issue">//h:meta[@name='prism.number']/@content</metadata>
+		<metadata name="startPage">//h:meta[@name='prism.startingPage']/@content</metadata>
+		<metadata name="publisher">//h:meta[@name='dc.publisher']/@content</metadata>
+		<metadata name="publisher">//h:meta[@name='citation_publisher']/@content</metadata>
+		<metadata name="publisher">//h:meta[@name='Author']/@content</metadata>
+		<metadata name="issn">//h:meta[@name='prism.issn']/@content</metadata>
+		<metadata name="journal">//h:meta[@name='dc.source']/@content</metadata>
+		<metadata name="journal">//h:meta[@name='prism.publicationName']/@content</metadata>
+		<metadata name="journal">//h:meta[@name='citation_journal_title']/@content
+		</metadata>
+		<metadata name="author">//h:meta[@name='dc.creator']/@content</metadata>
+		<metadata name="authors">//h:meta[@name='citation_authors']/@content</metadata>
+		<metadata name="author">/h:html/h:body/div[@id='container']/div[@id='content']/div[@class='middle_content']/div/div[@class='author_gp']/a/text()
+		</metadata>
+		<metadata name="title">//h:meta[@name='dc.title']/@content</metadata>
+		<metadata name="title">//h:meta[@name='citation_title']/@content</metadata>
+		<metadata name="volume">//h:meta[@name='citation_volume']/@content</metadata>
+		<metadata name="date">//h:meta[@name='dcterms.issued']/@content</metadata>
+		<metadata name="date">//h:meta[@name='citation_date']/@content</metadata>
+		<metadata name="date">//h:meta[@name='dc.date']/@content</metadata>
+		<metadata name="date">//h:meta[@name='prism.publicationDate']/@content</metadata>
+		<metadata name="year">//h:meta[@name='citation_year']/@content</metadata>
+		<metadata name="doi">//h:meta[@name='citation_doi']/@content</metadata>
+		<metadata name="doi">//h:meta[@name='prism.doi']/@content</metadata>
+		<metadata name="doi">//h:meta[@name='dc.identifier']/@content</metadata>
+		<metadata name="abstract">//h:meta[@name='citation_abstract']/@content</metadata>
+		<metadata name="abstract">//h:meta[@name='dc.description']/@content</metadata>
+		<metadata name="type">//h:meta[@name='prism.section']/@content</metadata>
+		<metadata name="type">//h:meta[@name='dc.type']/@content</metadata>
+		
+<!-- Hindawi group -->		
+		<metadata name="title">/h:html/h:body/div[@id='container']/div[@id='content']/div[@class='middle_content']/div/div[@class='article_type']/text()
+		</metadata>
+		<metadata name="doi">/h:html/h:body/div[@id='container']/div[@id='content']/div[@class='middle_content']/div/pre/a[@href]/text()
+		</metadata>
 		<metadata name="type">/h:html/h:body/div[@id='container']/div[@id='content']/div[@class='middle_content']/div/h2/text()
 		</metadata>
 		<metadata name="address">/h:html/h:body/div[@id='container']/div[@id='content']/div[@class='middle_content']/div/p[1]/text()

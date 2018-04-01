@@ -130,7 +130,8 @@ public class TransformerWrapper {
 		FileUtils.write(new File("target/debug/transform.xml"), xmlString, Charset.forName("UTF-8"));
 		Element xmlElement = XMLUtil.parseXML(xmlString);
 		htmlElement = new HtmlFactory().parse(xmlElement);
-		XMLUtil.debug(xmlElement, new FileOutputStream("target/firstpass.html"), 1);
+//		XMLUtil.debug(xmlElement, new FileOutputStream("target/firstpass.html"), 1);
+		XMLUtil.debug(xmlElement, new FileOutputStream(outfile), 1);
 		
 		return htmlElement;
 	}

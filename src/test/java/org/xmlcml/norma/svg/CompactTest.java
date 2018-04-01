@@ -48,7 +48,7 @@ private static final Logger LOG = Logger.getLogger(CompactTest.class);
 	@Test
 	public void testPDFToCompactSVG() {
 		NormaRunner normaRunner = new NormaRunner();
-		File projectDir = new File(NormaFixtures.TEST_DEMO_DIR, "cert");
+		File projectDir = new File(NormaFixtures.TEST_DEMOS_DIR, "cert");
 		File targetDir = new File("target/demos/cert/");
 		CMineTestFixtures.cleanAndCopyDir(projectDir, targetDir);
 		normaRunner.convertRawPDFToProjectToCompactSVG(targetDir);
